@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: pipeline_mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: hr_analytics_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d  # Mount the sql directory with multiple SQL files
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=caching_sha2_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+  app:
+    build: .
+    container_name: pipeline_app_service
+    depends_on:
+      mysql:
+        condition: service_healthy  # This ensures app waits for MySQL's health check to pass
+    environment:
+      MYSQL_HOST: pipeline_mysql_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root123
+      MYSQL_DB: hr_analytics_db
+    volumes:
+      - ./src:/src
+
+volumes:
+  mysql_data:
