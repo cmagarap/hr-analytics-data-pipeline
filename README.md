@@ -34,10 +34,10 @@ Before running the services, make sure you have the following installed:
 If you haven’t already, clone the repository:
 
 ```bash
-git clone https://github.com/your-repository/hr-analytics-service.git
-cd hr-analytics-service
+git clone https://github.com/cmagarap/hr-analytics-data-pipeline.git
+cd hr-analytics-data-pipeline
 ```
-
+You may use SSH is HTTPS clone does not work.
 ### 2. Build the Docker Image
 
 Once in the project directory, build the Docker image using the following command:
@@ -77,7 +77,7 @@ docker-compose up -d
 Here’s a brief overview of the project’s file structure:
 
 ```
-hr-analytics-service/
+hr-analytics-data-pipeline/
 ├── Dockerfile                         # Docker image configuration
 ├── docker-compose.yml                 # Orchestrates the ETL pipeline and MySQL database services
 ├── requirements.txt                   # Python dependencies
@@ -155,7 +155,7 @@ docker-compose down
 For example:
 
 ```bash
-docker run -v /path/to/local/reports:/reports --name hr-analytics-service ...
+docker run -v /path/to/local/reports:/reports --name hr-analytics-data-pipeline-app ...
 ```
 
 This will ensure that the reports are saved in `/path/to/local/reports` on your local machine.
