@@ -1,0 +1,7 @@
+candidate_id,full_name,total_applications,accepted_applications,success_rate
+1,Alice Smith,1,0,0.0
+6,Frank White,1,0,0.0
+3,Charlie Brown,3,1,0.3333333333333333
+5,Emma Wilson,1,1,1.0
+4,David Lee,1,1,1.0
+2,Bob Johnson,2,1,0.5
